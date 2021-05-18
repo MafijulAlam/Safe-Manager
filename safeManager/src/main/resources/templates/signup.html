@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <style>
+    .bg-primary{
+      background: #ABEBC6   !important;
+    }
+
+    .my-card{
+      padding: 20px;
+      background:#FFFFFF;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" th:href="@{/}">Safe Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto text-uppercase">
+
+      <li class="nav-item ">
+        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/about}">About</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="#">Login</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link " th:href="@{/signup}">Sign Up</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="my-card mt-1">
+
+          <div th:if="${session.message}"
+               th:classappend="${session.message}"
+               class="alert alert-success" role="alert">
+
+            <p class="text-center" th:text="${session.message.content}"></p>
+
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+          </div>
+
+          <h1 class="text-center font-weight-light">SignUp</h1>
+
+          <form action="" th:action="@{/do_register}" method="post" th:object="${user}">
+
+            <div class="form-group">
+
+                <label for="name_field">Name</label>
+
+                <input
+                        name="name"
+                        type="text"
+                     class="form-control"
+                     id="name_field"
+                     aria-describedby="emailHelp"
+                       placeholder="Name"
+                     required
+                     th:value="${user.name}">
+            </div>
+
+            <div class="form-group">
+
+              <label for="email_field">Email</label>
+
+              <input
+                      name="email"
+                      type="text"
+                     class="form-control"
+                     id="email_field"
+                     aria-describedby="emailHelp"
+                     placeholder="Email"
+                     required
+                     th:value="${user.email}">
+            </div>
+
+            <div class="form-group">
+
+              <label for="password_field">Password</label>
+
+              <input
+                      name="password"
+                      type="password"
+                     class="form-control"
+                     id="password_field"
+                     aria-describedby="emailHelp"
+                     placeholder="Password"
+                     required>
+            </div>
+
+            <div class="form-group">
+                <textarea name="about" th:value="${user.about}" placeholder="Say something about you!" rows="5" class="form-control"></textarea>
+
+            </div>
+
+            <div class="form-group form-check text-center">
+
+                <input type="checkbox"
+                name="agreement"
+                class="form-check-input"
+                id="agreement"/>
+
+                <label for="agreement" > Accept terms and conditions</label>
+            </div>
+
+            <div class="container text-center">
+              <button type="submit" class="btn btn-primary ">Submit</button>
+              <button type="reset" class="btn btn-warning ">Reset</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
